@@ -41,10 +41,8 @@ public class BeerControllerIT {
     @Nested
     class InitNewForm {
 		
-		@ParameterizedTest(name = "#{index} with [{arguments}]")
-        @MethodSource("com.mlorenzo.brewery.web.controllers.BeerControllerIT#getStreamAllUsers")
-        void initCreationFormWithHttpBasic(String user, String pwd) throws Exception {
-            mockMvc.perform(get("/beers/new").with(httpBasic(user, pwd)))
+        void initCreationFormWithHttpBasic() throws Exception {
+            mockMvc.perform(get("/beers/new").with(httpBasic("spring", "admin")))
                     .andExpect(status().isOk())
                     .andExpect(view().name("beers/createOrUpdateBeer"))
                     .andExpect(model().attributeExists("beer"));
